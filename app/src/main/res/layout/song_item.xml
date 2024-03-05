@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/song_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical"
+    android:padding="23dp">
+
+    <ImageView
+            android:id="@+id/song_img"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/song_image_field"
+            android:fadingEdge="horizontal|vertical|none" />
+
+        <!-- Song name -->
+        <TextView
+            android:id="@+id/song_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_toEndOf="@+id/song_img"
+            android:fontFamily="sans-serif"
+            android:text="Song Name"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <!-- Song's artist -->
+        <TextView
+            android:id="@+id/artist_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_toEndOf="@+id/song_img"
+            android:fontFamily="sans-serif"
+            android:text="Artist Name"
+            android:textColor="@color/grey"
+            android:textSize="21sp" />
+
+</RelativeLayout>
+
+
+
+

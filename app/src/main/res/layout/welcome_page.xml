@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LaunchApp">
+
+    <!-- Homepage Background Image -->
+    <ImageView
+        android:id="@+id/app_launch_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/background_image_description"
+        android:scaleType="centerCrop"
+        android:src="@drawable/app_launch_background" />
+
+
+    <!-- Start Listening Button -->
+    <Button
+        android:id="@+id/start_listening_button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="#625555"
+        android:fadingEdge="horizontal|vertical"
+        android:fontFamily="monospace"
+        android:insetTop="0dp"
+        android:padding="12dp"
+        android:text="@string/Start_Button_Description"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#EADFDF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:backgroundTint="@null"
+        app:cornerRadius="@null"
+        app:iconPadding="8dp" />
+</RelativeLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LaunchApp">
+
+
+
+    <ImageView
+        android:id="@+id/app_background2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/background_image_description"
+        android:scaleType="centerCrop"
+        android:src="@drawable/app_background_transparent"
+        />
+
+    <Button
+        android:id="@+id/back_button2"
+        android:background="@drawable/back_arrow"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/go_back"
+        />
+
+
+
+    <EditText
+        android:layout_width= "match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/User_or_email"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize= "21sp"
+        android:background="@drawable/user_input_fields"
+        android:layout_marginTop="150dp"
+        android:fontFamily="monospace"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:padding="18dp"
+        android:inputType="textEmailAddress"
+        android:id="@+id/user_or_email"
+    />
+
+    <EditText
+        android:layout_width= "match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize= "21sp"
+        android:background="@drawable/user_input_fields"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_marginTop="230dp"
+        android:fontFamily="monospace"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:padding="18dp"
+        android:insetTop="0dp"
+        android:inputType="textPassword"
+        android:id="@+id/password"
+        />
+
+
+    <Button
+        android:id="@+id/sign_in_button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="560dp"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="#625555"
+        android:fadingEdge="horizontal|vertical"
+        android:fontFamily="monospace"
+        android:insetTop="0dp"
+        android:padding="12dp"
+        android:text="@string/log_in_button2"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#EADFDF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:backgroundTint="@null"
+        app:cornerRadius="@null"
+        app:iconPadding="8dp" />
+
+</RelativeLayout>

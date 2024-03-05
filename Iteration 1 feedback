@@ -1,0 +1,25 @@
+Criterion Feedback
+
+lots of logic for a db layer
+
+what happens if a user is not successfully added? how would the front-end know?
+
+stubdb should have the actual stubbed code, the interface should be the db class so that your non-stub db can implement this too
+
+If this is a static singleton situation why are all your method instance methods? Make them static so you do not have to chain methods in other places.
+
+why make your variables private if you are making getters and setters for everything anyways? Should password really have a setter?
+
+why does your domain object live in the database layer? Move it to a separate package. Why do your sets do logic like validation? SRP violation
+
+is there a way for this to fail? you have no try/catch or throws so I am unsure how this would fail. Also SRP violation of validation and account creation and db setting
+
+smelly code everywhere you find yourself having to chain Db.getInstance.whatever(). Make the methods static
+
+SRP and OCP violations
+
+You have the same final static vars declared in multiple places. Sounds like you need a new class to reduce your redundancy
+
+There is way too much disorganization, poor standards management, and redundancy for a third-year project. 
+
+You need to do a bunch of clean up and refactoring to get this in order. 
