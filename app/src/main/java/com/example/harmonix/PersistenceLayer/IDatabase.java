@@ -1,6 +1,6 @@
 /*****************************
- * Interface for Database
- * Stores User information
+ * Interface for Database that
+ * stores User information
  ****************************/
 package com.example.harmonix.PersistenceLayer;
 

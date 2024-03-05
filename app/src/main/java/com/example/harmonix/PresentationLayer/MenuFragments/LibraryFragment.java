@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.example.harmonix.PresentationLayer.Library.Downloads;
-import com.example.harmonix.PresentationLayer.Library.LikedArtists;
-import com.example.harmonix.PresentationLayer.Library.LikedSongs;
 import com.example.harmonix.PresentationLayer.Library.Playlists;
 import com.example.harmonix.R;
 
@@ -75,28 +74,31 @@ public class LibraryFragment extends Fragment {
         playlistsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), Playlists.class));
+                Playlists playlistsFragment = new Playlists();
+
+                // Replace the current fragment with the PlaylistsFragment
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.playlists, playlistsFragment);
+                transaction.addToBackStack(null);  // Optional: Add to back stack to allow back navigation
+                transaction.commit();
             }
         });
 
         artistsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), LikedArtists.class));
             }
         });
 
         songsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), LikedSongs.class));
             }
         });
 
         downloadsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), Downloads.class));
             }
         });
 

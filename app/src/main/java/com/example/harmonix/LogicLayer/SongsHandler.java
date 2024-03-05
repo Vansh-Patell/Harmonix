@@ -1,7 +1,9 @@
 /***************************************************
  * Song Handler class
  * Contains the Logic to create a Song object using
- * /res/raw folder where the .mp3 files are stored
+ * /res/raw folder where the .mp3 files are stored.
+ * Then parse the song information from it and store
+ * it in a list.
  **************************************************/
 package com.example.harmonix.LogicLayer;
 
@@ -16,33 +18,40 @@ import java.util.ArrayList;
 
 public class SongsHandler {
 
+    /*************************************
+     * getAllSongs method
+     * This method gets all the songs from
+     * the /res/raw folder and stores them
+     * in a list.
+     *************************************/
     public static ArrayList<Songs> getAllSongs(Context context) {
 
         ArrayList<Songs> temp = new ArrayList<>();
         final Field[] fields = R.raw.class.getFields();
 
-        //loop through all the.mp3 in the /res/raw folder
+        // loop through all the.mp3 (fields) in the /res/raw folder
         for (Field field : fields) {
             try {
                 int resId = field.getInt(null);
                 String songName = field.getName();
-                String title = songName;   //songTitle
+                String title = songName; // songTitle
                 Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + resId);
-                String songPath = uri.toString();    //songPath
+                String songPath = uri.toString(); // songPath
 
                 // Get other data for the song object
                 MediaMetadataRetriever retriever = new MediaMetadataRetriever();
                 retriever.setDataSource(context, Uri.parse(songPath));
-                String artist = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);  //artistName
-                String album = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);   //albumName
-                String duration = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);  //duration
+                String artist = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST); // artistName
+                String album = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM); // albumName
+                String duration = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION); // duration
 
                 // Create a Song object and add it to the list
                 Songs song = new Songs(songPath, title, artist, album, duration, resId);
                 temp.add(song);
 
                 // Print song details to Logcat
-                Log.e("Song Details", "Title: " + title + ", Path: " + songPath + ", Artist: " + artist + ", Album: " + album + ", Duration: " + duration);
+                Log.e("Song Details", "Title: " + title + ", Path: " + songPath + ", Artist: " + artist + ", Album: "
+                        + album + ", Duration: " + duration);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
@@ -53,6 +62,7 @@ public class SongsHandler {
     /**************************************
      * parseSongInformation
      * This function updates the song names
+     * for better display in the app,
      * since in the /res/raw folder they
      * are stored in lower case and contains
      * "_".

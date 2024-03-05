@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/account_management">
+    android:id="@+id/playlists">
 
     <ImageView
         android:id="@+id/app_background3"
@@ -16,19 +16,9 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-40dp" />
 
-    <!-- Go Back Button -->
-    <Button
-        android:id="@+id/back_button1"
-        android:background="@drawable/back_arrow"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="30dp"
-        android:contentDescription="@string/go_back"
-        />
 
     <TextView
-        android:id="@+id/accountManagementText"
+        android:id="@+id/playlistsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Playlists"
@@ -42,8 +32,16 @@
         android:typeface="serif"
         android:padding="18dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- New -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/playlistsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="250dp"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>

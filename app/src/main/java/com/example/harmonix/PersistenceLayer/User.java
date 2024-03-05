@@ -1,23 +1,24 @@
 /************************************************************
  * This class is used to create a new User object. It contains
- * the username, password, mobile and email of the user for
- * Iteration 1.
+ * the username, password, mobile and email of the user.
  ************************************************************/
 package com.example.harmonix.PersistenceLayer;
 
+import com.example.harmonix.LogicLayer.AccountHandler;
+
 public class User {
 
+    // Variables to store user information
     private String username;
     private String password;
     private String email;
-    // mobile number
     private String mobile;
 
     public User(String username, String email, String password) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.mobile = "";  //no mobile number as a part of signup, the users can add it later on
+        this.mobile = ""; // no mobile number as a part of signup, the users can add it later on
     }
 
     /**********************
@@ -43,11 +44,7 @@ public class User {
      * Setters
      *********************/
     public void setUsername(String username) {
-        if (username.length() > 0) {
-            this.username = username;
-        } else {
-            throw new IllegalArgumentException("Invalid username");
-        }
+        this.username = username;
     }
 
     public void setPassword(String password) {
@@ -55,10 +52,8 @@ public class User {
     }
 
     public void setEmail(String email) {
-        if (email.length() > 0) {
+        if (AccountHandler.isValidEmail(email)) {
             this.email = email;
-        } else {
-            throw new IllegalArgumentException("Invalid email");
         }
     }
 

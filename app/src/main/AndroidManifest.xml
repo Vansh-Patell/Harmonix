@@ -47,25 +47,6 @@
             android:exported="true" >
         </activity>
 
-        <activity
-            android:name=".PresentationLayer.Library.Playlists"
-            android:exported="true" >
-        </activity>
-
-        <activity
-            android:name=".PresentationLayer.Library.LikedSongs"
-            android:exported="true" >
-        </activity>
-
-        <activity
-            android:name=".PresentationLayer.Library.LikedArtists"
-            android:exported="true" >
-        </activity>
-
-        <activity
-            android:name=".PresentationLayer.Library.Downloads"
-            android:exported="true" >
-        </activity>
     </application>
 
 </manifest>

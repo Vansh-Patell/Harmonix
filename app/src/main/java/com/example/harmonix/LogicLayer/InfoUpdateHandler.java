@@ -1,11 +1,22 @@
+/***************************************************
+ * InfoUpdateHandler class
+ * This class contains the logic to update a user's
+ * information
+ **************************************************/
+
 package com.example.harmonix.LogicLayer;
 
 import android.util.Log;
-
 import com.example.harmonix.PersistenceLayer.*;
 
 public class InfoUpdateHandler {
 
+    /*************************************
+     * updateAccount method
+     * This method updates the user's account
+     * information after verifying the user's
+     * inputs.
+     *************************************/
     public static boolean updateAccount(String mobileString, String emailString, String passwordString,
                                         String confirmPasswordString) {
 
@@ -16,11 +27,8 @@ public class InfoUpdateHandler {
         // Get the current user who is logged in the system
         IDatabase database = Database.getInstance();
         String userName = database.getCurrentUser();
-        Log.e("TAG", "Username: " + userName);
         User currentUser = Database.getInstance().getUser(userName);
         userName = currentUser.getUsername();
-
-        Log.e("User Information before update\n", "--" + currentUser.getEmail() + currentUser.getUsername() + currentUser.getPassword());
 
         boolean updated = false;
 
@@ -40,12 +48,9 @@ public class InfoUpdateHandler {
                 updated = true;
             }
 
+            // update the user's information in the database
             database.updateUser(userName, currentUser.getEmail(), currentUser.getPassword());
         }
-
-        Log.e("User Information after update\n", "--" + currentUser.getEmail() + currentUser.getUsername() + currentUser.getPassword());
-
-
         return updated;
     }
 

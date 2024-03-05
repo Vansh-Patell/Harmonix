@@ -5,11 +5,11 @@
  * a real HSQL database
  ****************************/
 package com.example.harmonix.PersistenceLayer;
-import android.content.Context;
 
 public class Database {
-    private static final boolean USE_REAL_DATABASE = true; //use the real database or not
+    private static final boolean USE_REAL_DATABASE = true; // use the real database or not
     private static IDatabase instance;
+
     public static synchronized IDatabase getInstance() {
         if (instance == null) {
             if (USE_REAL_DATABASE) {

@@ -1,14 +1,20 @@
+/*************************************
+ * Songs object
+ * This class holds information about
+ * a song, such as its Path, Title,
+ * artist, and duration
+ *************************************/
 package com.example.harmonix.DomainSpecificObjects;
-
-import android.net.Uri;
 
 public class Songs {
 
-    //Variables to represent song's information
+    // Variables to represent song's information
     private String songPath, songTitle, songArtist, albumName, songDuration;
-    private int resID;  //the resource ID that gets assigned to a song when its created on the front end
+    private int resID; // the resource ID that gets assigned to a song when its created on the front
+    // end
 
-    public Songs(String songPath, String songTitle, String songArtist, String albumName, String songDuration, int resID) {
+    public Songs(String songPath, String songTitle, String songArtist, String albumName, String songDuration,
+                 int resID) {
         this.songPath = songPath;
         this.songTitle = songTitle;
         this.songArtist = songArtist;
@@ -20,7 +26,6 @@ public class Songs {
     /*************************
      * Getters
      ************************/
-
     public int getResID() {
         return resID;
     }
