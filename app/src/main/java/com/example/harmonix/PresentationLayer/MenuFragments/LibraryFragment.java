@@ -1,12 +1,18 @@
 package com.example.harmonix.PresentationLayer.MenuFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.harmonix.PresentationLayer.Library.Downloads;
+import com.example.harmonix.PresentationLayer.Library.LikedArtists;
+import com.example.harmonix.PresentationLayer.Library.LikedSongs;
+import com.example.harmonix.PresentationLayer.Library.Playlists;
 import com.example.harmonix.R;
 
 /**
@@ -57,6 +63,43 @@ public class LibraryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_library, container, false);
+        View view = inflater.inflate(R.layout.fragment_library, container, false);
+
+        // Find your CardViews
+        CardView playlistsCardView = view.findViewById(R.id.playlistsCardView);
+        CardView artistsCardView = view.findViewById(R.id.artistsCardView);
+        CardView songsCardView = view.findViewById(R.id.songsCardView);
+        CardView downloadsCardView =view.findViewById(R.id.downloadsCardView);
+
+        // Set OnClickListener for each CardView
+        playlistsCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), Playlists.class));
+            }
+        });
+
+        artistsCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LikedArtists.class));
+            }
+        });
+
+        songsCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LikedSongs.class));
+            }
+        });
+
+        downloadsCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), Downloads.class));
+            }
+        });
+
+        return view;
     }
 }

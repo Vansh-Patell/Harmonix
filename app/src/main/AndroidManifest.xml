@@ -25,31 +25,46 @@
         <activity
             android:name=".PresentationLayer.UserProfile.AccountOptionsPage"
             android:exported="true">
-
         </activity>
 
         <activity
             android:name=".PresentationLayer.UserProfile.SignUpPage"
             android:exported="true">
-
         </activity>
 
         <activity
             android:name=".PresentationLayer.UserProfile.LogInPage"
             android:exported="true">
-
         </activity>
 
         <activity
             android:name=".PresentationLayer.MenuFragments.AppMainPage"
             android:exported="true">
-
         </activity>
 
         <activity
             android:name=".PresentationLayer.MusicDiscovery.MusicPlayerActivity"
             android:exported="true" >
+        </activity>
 
+        <activity
+            android:name=".PresentationLayer.Library.Playlists"
+            android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".PresentationLayer.Library.LikedSongs"
+            android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".PresentationLayer.Library.LikedArtists"
+            android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".PresentationLayer.Library.Downloads"
+            android:exported="true" >
         </activity>
     </application>
 

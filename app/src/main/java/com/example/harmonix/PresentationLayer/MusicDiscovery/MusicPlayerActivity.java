@@ -4,18 +4,18 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.harmonix.DomainSpecificObjects.Songs;
 import com.example.harmonix.LogicLayer.SongsHandler;
 import com.example.harmonix.R;
-
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -67,6 +67,39 @@ public class MusicPlayerActivity extends AppCompatActivity {
                     }
                 }
                 new Handler().postDelayed(this, 100);
+            }
+        });
+
+        // Checks if someones clicks on the menu option
+        ImageButton menuButton = findViewById(R.id.menu_button);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(getApplicationContext(),menuButton);
+                popupMenu.inflate(R.menu.menu_songs);
+                popupMenu.show();
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getItemId() ==R.id.item1){
+                            // sets the add to downloads
+                            return true;
+                        }
+                        else if (item.getItemId() == R.id.item2){
+                            // Add to liked artists option
+                            return true;
+                        } else if (item.getItemId() == R.id.item3){
+                            // Add to liked songs option
+                            return true;
+                        }  else if (item.getItemId() == R.id.item4){
+                            // Add to downloads option
+                            return true;
+                        }
+                        else{
+                            return false;
+                        }
+                    }
+                });
             }
         });
 

@@ -134,4 +134,18 @@
 
     </RelativeLayout>
 
+    <ImageButton
+        android:id="@+id/menu_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="library_menu"
+        android:src="@android:drawable/ic_menu_more"
+        android:alpha="10"
+        />
+
 </RelativeLayout>
