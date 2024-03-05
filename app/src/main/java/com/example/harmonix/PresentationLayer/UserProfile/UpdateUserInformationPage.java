@@ -1,16 +1,19 @@
+/****************************
+ * UpdateUserInformation page Class
+ * This class is the responsible to
+ * handle the UI when user wants
+ * to update their account information
+ ***************************/
 package com.example.harmonix.PresentationLayer.UserProfile;
 
 import static com.example.harmonix.LogicLayer.InfoUpdateHandler.updateAccount;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.harmonix.PersistenceLayer.Database;
 import com.example.harmonix.PersistenceLayer.IDatabase;
 import com.example.harmonix.PersistenceLayer.User;
@@ -66,7 +69,7 @@ public class UpdateUserInformationPage extends AppCompatActivity {
      * whether user has successfully logged out
      *************************************/
     private void logout() {
-        //Get the instance of the stub database
+        // Get the instance of the stub database
         IDatabase database = Database.getInstance();
         String current = database.getCurrentUser();
         database.setCurrentUser("");
@@ -79,15 +82,16 @@ public class UpdateUserInformationPage extends AppCompatActivity {
      * whether user has successfully updated
      * their information
      *************************************/
-    private void updateAccountInformation(){
+    private void updateAccountInformation() {
 
         String mobileString = new_mobile.getText().toString();
         String emailString = new_email.getText().toString();
         String passwordString = new_password.getText().toString();
         String confirmPasswordString = new_password_confirm.getText().toString();
 
-        //use the InfoUpdate account handler to verify user inputs & update the information
-        boolean success = updateAccount(mobileString,emailString,passwordString,confirmPasswordString);
+        // use the InfoUpdate account handler to verify user inputs & update the
+        // information
+        boolean success = updateAccount(mobileString, emailString, passwordString, confirmPasswordString);
 
         if (success) {
             Toast.makeText(UpdateUserInformationPage.this, "Account information Updated", Toast.LENGTH_SHORT).show();
@@ -101,7 +105,5 @@ public class UpdateUserInformationPage extends AppCompatActivity {
         new_password.setText("");
         new_password_confirm.setText("");
     }
-    
-    
 
 }

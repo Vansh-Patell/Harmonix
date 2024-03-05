@@ -32,7 +32,6 @@ public class MusicList extends RecyclerView.Adapter<MusicList.MyViewHolder> {
     private static Context myContext;
     private ArrayList<Songs> allSongs;   //the arraylist that contains all the song objects
 
-
     public MusicList(Context myContext, ArrayList<Songs> allSongs) {
         this.myContext = myContext;
         this.allSongs = allSongs;

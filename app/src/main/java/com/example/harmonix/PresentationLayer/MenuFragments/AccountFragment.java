@@ -1,7 +1,12 @@
+/***********************************
+ * AccountFragment Class
+ * This class is the responsible to
+ * handle the UI when user wants
+ * to update their account informatin
+ **********************************/
 package com.example.harmonix.PresentationLayer.MenuFragments;
 
 import static com.example.harmonix.LogicLayer.InfoUpdateHandler.updateAccount;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,15 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.harmonix.PersistenceLayer.Database;
 import com.example.harmonix.PersistenceLayer.IDatabase;
 import com.example.harmonix.PresentationLayer.UserProfile.AccountOptionsPage;
-import com.example.harmonix.PresentationLayer.UserProfile.UpdateUserInformationPage;
 import com.example.harmonix.R;
 
 /**
@@ -79,7 +79,6 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.account_management, container, false);
 
         // Get the input fields
@@ -88,7 +87,9 @@ public class AccountFragment extends Fragment {
         new_password = rootView.findViewById(R.id.change_password);
         new_password_confirm = rootView.findViewById(R.id.change_password_confirm);
 
-        // Apply Change Button Pressed
+        /*************************************
+         * Apply Change Button Pressed
+         *************************************/
         Button applyAccountChangeButton = rootView.findViewById(R.id.apply_account_change_button);
         applyAccountChangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +102,9 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        // Logout Button Pressed
+        /*************************************
+         * Logout Button Pressed
+         *************************************/
         Button logoutButton = rootView.findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +123,8 @@ public class AccountFragment extends Fragment {
      *************************************/
     private void logout() {
         database.setCurrentUser("");
+        Toast.makeText(getActivity(), "Logged out", Toast.LENGTH_SHORT).show();
+
         startActivity(new Intent(getActivity(), AccountOptionsPage.class));
     }
 

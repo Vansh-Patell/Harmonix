@@ -1,14 +1,18 @@
+/****************************
+ * Signup page Class
+ * This class is the repsonsible to
+ * handle the UI for the signup page
+ * and show Toasts for errors
+ ***************************/
 package com.example.harmonix.PresentationLayer.UserProfile;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.harmonix.LogicLayer.AccountHandler;
 import com.example.harmonix.PresentationLayer.MenuFragments.AppMainPage;
 import com.example.harmonix.R;
@@ -55,13 +59,12 @@ public class SignUpPage extends AppCompatActivity {
         });
     }
 
-
     /******************************************
      * signUp method
      * Shows error messages using Toasts on the
      * UI when user makes mistakes while signing up
      *****************************************/
-    private void signUp(){
+    private void signUp() {
 
         // convert the user input to string
         String usernameString = username.getText().toString();
@@ -69,16 +72,18 @@ public class SignUpPage extends AppCompatActivity {
         String confirmPasswordString = confirmPassword.getText().toString();
         String emailString = email.getText().toString();
 
-        //if user successfully created an account, show it on UI
-        if(AccountHandler.createAccount(usernameString,emailString,passwordString,confirmPasswordString) && AccountHandler.isValidEmail(emailString)
-                && !passwordString.isEmpty() && !confirmPasswordString.isEmpty()){
+        // if user successfully created an account, show it on UI
+        if (AccountHandler.createAccount(usernameString, emailString, passwordString, confirmPasswordString)
+                && AccountHandler.isValidEmail(emailString)
+                && !passwordString.isEmpty() && !confirmPasswordString.isEmpty()) {
             Toast.makeText(SignUpPage.this, "User account created successfully...", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(SignUpPage.this, AppMainPage.class));  //go to the app
+            startActivity(new Intent(SignUpPage.this, AppMainPage.class)); // go to the app
         }
 
-        //check the email pattern
-        if(!AccountHandler.isValidEmail(emailString)){
-            Toast.makeText(SignUpPage.this, "Invalid email format! Please enter a valid email", Toast.LENGTH_SHORT).show();
+        // check the email pattern
+        if (!AccountHandler.isValidEmail(emailString)) {
+            Toast.makeText(SignUpPage.this, "Invalid email format! Please enter a valid email", Toast.LENGTH_SHORT)
+                    .show();
             email.setText("");
         }
 
