@@ -1,23 +1,26 @@
-package com.example.harmonix.PresentationLayer.MusicDiscovery;
+/************************************
+ * MusicPlayerActivity class
+ * This class dynamically changes the UI
+ * of our music player with a MusicPlayer
+ * class that handles the logic behind it
+ **********************************/
 
-import android.media.MediaPlayer;
+package com.example.harmonix.PresentationLayer.MusicPlayer;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.harmonix.DomainSpecificObjects.Songs;
+import com.example.harmonix.LogicLayer.MusicPlayer;
 import com.example.harmonix.LogicLayer.SongsHandler;
+import com.example.harmonix.PresentationLayer.MusicDiscovery.MusicList;
 import com.example.harmonix.R;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
+
 
 public class MusicPlayerActivity extends AppCompatActivity {
 
@@ -25,9 +28,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
     TextView titleTv, currentTimeTv, totalTimeTv;
     SeekBar seekBar, volumeBar;
     ImageView pausePlay, nextButton, previousButton, exitButton, musicPlayerImage;
-    ArrayList<Songs> songsList;
     Songs currentSong;
-    MediaPlayer mediaPlayer;
+    MusicPlayer mediaPlayer = MusicPlayer.getInstance();
 
     float currVolume = 1f; // Current volume of app, float between 0.0 to 1.0
 
@@ -49,18 +51,16 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
         titleTv.setSelected(true);
 
-        songsList = CurrentSongs.getInstance().getSongList(); // THIS SETS THE LIST OF SONGS TO BE PLAYED FROM!!! VERY IMPORTANT
-
         setResourcesWithMusic();
 
         // Update seekBar based on current songs progress
         MusicPlayerActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (mediaPlayer != null) {
-                    seekBar.setProgress(mediaPlayer.getCurrentPosition());
-                    currentTimeTv.setText(convertToMilliseconds(mediaPlayer.getCurrentPosition()+""));
-                    if (mediaPlayer.isPlaying()) {
+                if (!MusicPlayer.isNull()) {
+                    seekBar.setProgress(MusicPlayer.getCurrentPosition());
+                    currentTimeTv.setText(MusicPlayer.convertToMilliseconds(MusicPlayer.getCurrentPosition()+""));
+                    if (MusicPlayer.isPlaying()) {
                         pausePlay.setImageResource(R.drawable.pause_icon);
                     } else {
                         pausePlay.setImageResource(R.drawable.play_icon);
@@ -70,45 +70,12 @@ public class MusicPlayerActivity extends AppCompatActivity {
             }
         });
 
-        // Checks if someones clicks on the menu option
-        ImageButton menuButton = findViewById(R.id.menu_button);
-        menuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(getApplicationContext(),menuButton);
-                popupMenu.inflate(R.menu.menu_songs);
-                popupMenu.show();
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        if (item.getItemId() ==R.id.item1){
-                            // sets the add to downloads
-                            return true;
-                        }
-                        else if (item.getItemId() == R.id.item2){
-                            // Add to liked artists option
-                            return true;
-                        } else if (item.getItemId() == R.id.item3){
-                            // Add to liked songs option
-                            return true;
-                        }  else if (item.getItemId() == R.id.item4){
-                            // Add to downloads option
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }
-                });
-            }
-        });
-
         // Update the current time of the song based on if the seek bar is altered by a user
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (mediaPlayer != null && fromUser) {
-                    mediaPlayer.seekTo(progress);
+                if (!MusicPlayer.isNull() && fromUser) {
+                    MusicPlayer.seekTo(progress);
                 }
             }
 
@@ -136,7 +103,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
                         log1 = 0;
 
                     currVolume = log1;
-                    mediaPlayer.setVolume(currVolume, currVolume);
+                    MusicPlayer.setVolume(currVolume);
 
                 }
             }
@@ -156,8 +123,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
     // Initiate all variables including bars and times for the song
     void setResourcesWithMusic() {
         exitButton.setOnClickListener(v -> exitActivity());
-        if (songsList != null && songsList.size() > 0) {
-            currentSong = songsList.get(currentIndex);
+        if (!MusicPlayer.isSongListEmpty()) {
+            currentSong = MusicPlayer.getCurrentSong();
 
             String parseName = currentSong.getSongTitle();
             titleTv.setText(SongsHandler.parseSongInformation(parseName).toString());
@@ -174,7 +141,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 Glide.with(getApplicationContext()).load(R.drawable.album_cover_img).into(musicPlayerImage);
             }
 
-            totalTimeTv.setText(convertToMilliseconds(currentSong.getSongDuration()));
+            totalTimeTv.setText(MusicPlayer.convertToMilliseconds(currentSong.getSongDuration()));
             pausePlay.setOnClickListener(v -> pausePlay());
             nextButton.setOnClickListener(v -> playNextSong());
             previousButton.setOnClickListener(v -> playPreviousSong());
@@ -188,65 +155,33 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
     // Exit this activity and safely close the MediaPlayer object
     private void exitActivity() {
-        clearMediaPlayer();
-        currentIndex = -1;
-        mediaPlayer = null;
+        MusicPlayer.delete();
         this.finish();
     }
 
-    // Play a specified song by clearing the previous MediaPlayer object, and overwriting it with a new one containing the song to be played
+    // Play the current song
     private void playMusic() {
-        clearMediaPlayer();
-        mediaPlayer=MediaPlayer.create(getApplicationContext(), getResources().getIdentifier(currentSong.getSongTitle(),"raw",getPackageName()));
-        mediaPlayer.start();
-        mediaPlayer.setVolume(currVolume, currVolume);
+        MusicPlayer.playMusic(getApplicationContext(), getResources().getIdentifier(currentSong.getSongTitle(),"raw",getPackageName()));
         seekBar.setProgress(0);
-        seekBar.setMax(mediaPlayer.getDuration());
+        seekBar.setMax(MusicPlayer.getDuration());
     }
 
-    // Safely delete the MediaPlayer object: mediaPlayer
-    private void clearMediaPlayer() {
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
-    }
 
     // Play the next song in the list
     private void playNextSong() {
-        if (currentIndex == songsList.size()-1) {
-            return;
-        }
-        currentIndex += 1;
+        MusicPlayer.playNextSong();
         setResourcesWithMusic();
     }
 
     // Play the previous song in the list
     private void playPreviousSong() {
-        if (currentIndex == 0) {
-            return;
-        }
-        currentIndex -= 1;
+        MusicPlayer.playPreviousSong();
         setResourcesWithMusic();
     }
 
     // Pause or Play the current song
     private void pausePlay() {
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
-        } else {
-            mediaPlayer.start();
-        }
-
-    }
-
-    // Convert time String to properly formatted minutes:seconds string for time to be displayed
-    public static String convertToMilliseconds(String duration) {
-        Long millis = Long.parseLong(duration);
-        return String.format("%02d:%02d",
-                TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
-                TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1));
+        MusicPlayer.pausePlay();
     }
 
 }

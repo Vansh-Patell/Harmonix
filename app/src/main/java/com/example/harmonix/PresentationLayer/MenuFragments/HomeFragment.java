@@ -1,5 +1,10 @@
+/************************************
+ * HomeFragment class
+ * This class is displays the list of
+ * available songs on the homepage as
+ * a List
+ ************************************/
 package com.example.harmonix.PresentationLayer.MenuFragments;
-
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -9,11 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.harmonix.DomainSpecificObjects.Songs;
+import com.example.harmonix.LogicLayer.MusicPlayer;
 import com.example.harmonix.PresentationLayer.MusicDiscovery.*;
 import com.example.harmonix.R;
 import java.util.ArrayList;
 import com.example.harmonix.LogicLayer.SongsHandler;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,13 +27,13 @@ import com.example.harmonix.LogicLayer.SongsHandler;
  */
 public class HomeFragment extends Fragment {
 
-   //"param1" and "param2" are parameters that are passed when
-   //creating an instance of the fragment using the newInstance method.
+    // "param1" and "param2" are parameters that are passed when
+    // creating an instance of the fragment using the newInstance method.
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String myParameterOne, myParameterTwo;
-    static ArrayList<Songs> songList;  //our Songs as a "List"
+    static ArrayList<Songs> songList; // our Songs on the homepage as a "List"
 
     RecyclerView recyclerView;
     MusicList musicList;
@@ -64,10 +69,15 @@ public class HomeFragment extends Fragment {
             myParameterTwo = getArguments().getString(ARG_PARAM2);
         }
 
-        //when the users enters the app, add all the songs using SongsHandler Logic class
+        // when the users enters the app, create all the Song objects
         songList = SongsHandler.getAllSongs(requireContext());
     }
 
+    /***************************
+     * onCreateView method
+     * This method inflates the layout for the fragment
+     * and sets the view to display the list of songs
+     ***************************/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -75,14 +85,14 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
-        //set the view display the list of songs on the homepage
+        // set the view display the list of songs on the homepage
         if (songList.size() > 1) {
             musicList = new MusicList(getContext(), songList);
             recyclerView.setAdapter(musicList);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         }
         // Set current List of songs to be all songs
-        CurrentSongs.getInstance().setList(SongsHandler.getAllSongs(getContext()));
+        MusicPlayer.setSongList(SongsHandler.getAllSongs(getContext()));
         return view;
     }
 

@@ -1,17 +1,17 @@
+/***********************************
+ * Library Class
+ * This class is the responsible to
+ * handle the UI when user wants
+ * to see their playlists, artists and downloads
+ **********************************/
 package com.example.harmonix.PresentationLayer.MenuFragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import com.example.harmonix.PresentationLayer.Library.Playlists;
 import com.example.harmonix.R;
 
 /**
@@ -64,23 +64,16 @@ public class LibraryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_library, container, false);
 
-        // Find your CardViews
+        //Get each CardView
         CardView playlistsCardView = view.findViewById(R.id.playlistsCardView);
         CardView artistsCardView = view.findViewById(R.id.artistsCardView);
         CardView songsCardView = view.findViewById(R.id.songsCardView);
         CardView downloadsCardView =view.findViewById(R.id.downloadsCardView);
 
-        // Set OnClickListener for each CardView
+        // Set OnClickListener for each CardView and navigate to that screen
         playlistsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Playlists playlistsFragment = new Playlists();
-
-                // Replace the current fragment with the PlaylistsFragment
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.playlists, playlistsFragment);
-                transaction.addToBackStack(null);  // Optional: Add to back stack to allow back navigation
-                transaction.commit();
             }
         });
 

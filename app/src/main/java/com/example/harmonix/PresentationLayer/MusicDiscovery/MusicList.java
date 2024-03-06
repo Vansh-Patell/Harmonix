@@ -21,7 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.harmonix.DomainSpecificObjects.Songs;
+import com.example.harmonix.LogicLayer.MusicPlayer;
 import com.example.harmonix.LogicLayer.SongsHandler;
+import com.example.harmonix.PresentationLayer.MusicPlayer.MusicPlayerActivity;
 import com.example.harmonix.R;
 
 import java.io.IOException;
@@ -57,7 +59,7 @@ public class MusicList extends RecyclerView.Adapter<MusicList.MyViewHolder> {
         //Update the songNames first to display them
         String parseName = allSongs.get(position).getSongTitle();
 
-        //set the songName and artistName for the homepage
+        //display the songName and artistName for the homepage
         holder.songName.setText(SongsHandler.parseSongInformation(parseName).toString());
         holder.artistName.setText(allSongs.get(position).getSongArtist());
 
@@ -66,20 +68,21 @@ public class MusicList extends RecyclerView.Adapter<MusicList.MyViewHolder> {
         Uri uri = Uri.parse("android.resource://" + myContext.getPackageName() + "/" + resId);
         byte[] images = getSongImage(uri.toString());
 
-        //If an album cover image exists, update the song_image in song_item.xml
+        //If an album cover image exists, update the song_image in song_item.xml & display it
         if (images != null) {
             Glide.with(myContext).asBitmap().load(images).into(holder.songImage);
         } else {   //show the default cover image
             Glide.with(myContext).load(R.drawable.album_cover_img).into(holder.songImage);
         }
 
-        // Handle user clicking on a song
+        // Handle user clicking on a song and play it accordingly
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // If it's the homepage, handle click accordingly
                 Context context = v.getContext();
                 MusicPlayerActivity.currentIndex = position;
+                MusicPlayer.setSongIndex(position);
                 Intent intent = new Intent(context, MusicPlayerActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
@@ -93,10 +96,9 @@ public class MusicList extends RecyclerView.Adapter<MusicList.MyViewHolder> {
      * getItemCount
      * @return number of songs
      *************************/
-
    // @Override
     public int getItemCount() {
-        return allSongs.size(); // Return the size of the filtered list
+        return allSongs.size(); // Return the size of the list
     }
 
     /***************************************
@@ -117,7 +119,11 @@ public class MusicList extends RecyclerView.Adapter<MusicList.MyViewHolder> {
         return art;
     }
 
-    // New method to filter the list
+    /**************************************
+     * setSongs method
+     * Update the current list of songs with
+     * the input list and notify
+     *************************************/
     public void setSongs(ArrayList<Songs> songs) {
         this.allSongs.clear();
         // Add the new list of songs

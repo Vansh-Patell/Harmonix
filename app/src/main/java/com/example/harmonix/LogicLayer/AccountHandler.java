@@ -43,7 +43,7 @@ public class AccountHandler {
     }
 
     /*******************************
-     * Private method to check if
+     * Class method to check if
      * the entered email has a valid
      * pattern
      *******************************/

@@ -1,3 +1,7 @@
+/*****************************************
+ * Radio Fragment class
+ * Iteration 3...
+ *****************************************/
 package com.example.harmonix.PresentationLayer.MenuFragments;
 
 import android.os.Bundle;

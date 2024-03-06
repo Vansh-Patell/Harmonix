@@ -2,7 +2,7 @@
  * AccountFragment Class
  * This class is the responsible to
  * handle the UI when user wants
- * to update their account informatin
+ * to update their account information
  **********************************/
 package com.example.harmonix.PresentationLayer.MenuFragments;
 

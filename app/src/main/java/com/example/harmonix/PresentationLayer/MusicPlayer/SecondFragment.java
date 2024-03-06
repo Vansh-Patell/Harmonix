@@ -1,3 +1,7 @@
+/************************************
+ * SecondFragment class
+ *
+ ***********************************/
 package com.example.harmonix.PresentationLayer.MusicPlayer;
 
 import android.os.Bundle;

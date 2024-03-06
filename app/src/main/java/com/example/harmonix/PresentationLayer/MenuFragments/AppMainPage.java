@@ -9,14 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Bundle;
-
-import com.example.harmonix.PresentationLayer.MenuFragments.AccountFragment;
-import com.example.harmonix.PresentationLayer.MenuFragments.HomeFragment;
-import com.example.harmonix.PresentationLayer.MenuFragments.LibraryFragment;
-import com.example.harmonix.PresentationLayer.MenuFragments.RadioFragment;
-import com.example.harmonix.PresentationLayer.MenuFragments.SearchFragment;
 import com.example.harmonix.R;
 
 public class AppMainPage extends AppCompatActivity {

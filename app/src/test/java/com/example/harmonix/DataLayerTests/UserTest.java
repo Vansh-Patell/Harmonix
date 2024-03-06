@@ -2,6 +2,7 @@ package com.example.harmonix.DataLayerTests;
 
 import com.example.harmonix.PersistenceLayer.Database;
 import com.example.harmonix.PersistenceLayer.IDatabase;
+import com.example.harmonix.PersistenceLayer.StubDatabase;
 import com.example.harmonix.PersistenceLayer.User;
 
 import org.junit.Before;
@@ -16,7 +17,7 @@ public class UserTest {
     // Setting up the database before testing
     @Before
     public void setUp() {
-        database = Database.getInstance();
+        database = new StubDatabase();
     }
 
     @Test

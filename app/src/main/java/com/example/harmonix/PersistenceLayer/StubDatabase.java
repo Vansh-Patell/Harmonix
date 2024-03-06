@@ -24,7 +24,9 @@ public class StubDatabase implements IDatabase {
      * adds a user to the list
      ***************************/
     public void addUser(User user) {
-        users.add(user);
+        if (!user.getUsername().equals("") && !user.getEmail().equals("") && !user.getPassword().equals("")) {
+            this.users.add(user);
+        }
     }
 
     /****************************
@@ -32,7 +34,9 @@ public class StubDatabase implements IDatabase {
      * remove a user to the list
      ***************************/
     public void removeUser(User user) {
-        this.users.remove(user);
+        if (user != null) {
+            this.users.remove(user);
+        }
     }
 
     /****************************

@@ -1,3 +1,8 @@
+/*****************************************
+ * SearchFragment class
+ * This class allows the users to display the
+ * search bar and its returned results
+ *****************************************/
 package com.example.harmonix.PresentationLayer.MenuFragments;
 
 import android.os.Bundle;
@@ -7,17 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.harmonix.DomainSpecificObjects.Songs;
+import com.example.harmonix.LogicLayer.MusicPlayer;
 import com.example.harmonix.LogicLayer.SongsHandler;
-import com.example.harmonix.PresentationLayer.MusicDiscovery.CurrentSongs;
 import com.example.harmonix.PresentationLayer.MusicDiscovery.MusicList;
 import com.example.harmonix.R;
-
 import java.util.ArrayList;
 
 /**
@@ -34,12 +36,12 @@ public class SearchFragment extends Fragment {
 
     private String myParameterOne, myParameterTwo;
 
-    //New
-    private EditText searchInput;
+    //---------------------------------------------------------------
+    private EditText searchInput;   //search bar input from user
     private RecyclerView searchRecyclerView;
     private MusicList adapter;
-    private ArrayList<Songs> allSongs;
-    private ArrayList<Songs> filteredSongs;
+    private ArrayList<Songs> allSongs;  //all songs in system
+    private ArrayList<Songs> filteredSongs;  //filtered songs
 
     public SearchFragment() {
         // Required empty public constructor
@@ -66,8 +68,8 @@ public class SearchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            myParameterOne= getArguments().getString(ARG_PARAM1);
-            myParameterTwo= getArguments().getString(ARG_PARAM2);
+            myParameterOne = getArguments().getString(ARG_PARAM1);
+            myParameterTwo = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -82,12 +84,12 @@ public class SearchFragment extends Fragment {
         searchRecyclerView = view.findViewById(R.id.searchRecyclerView);
         searchRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Populate allSongs with your list of songs
+        // Populate allSongs with original list of songs initially
         allSongs = SongsHandler.getAllSongs(getContext());
-        adapter = new MusicList(getContext(),new ArrayList<Songs>());
+        adapter = new MusicList(getContext(), new ArrayList<Songs>());
         searchRecyclerView.setAdapter(adapter);
 
-        // Add TextChangedListener to EditText
+        // Add TextChangedListener to EditText to update the results when user enters
         searchInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -107,7 +109,12 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-    //New
+    /**************************************
+     * filterSongs
+     * This function returns a list of songs
+     * that match the search text entered by
+     * the user.
+     *************************************/
     private void filterSongs(String searchText) {
         filteredSongs = new ArrayList<>();
         for (Songs song : allSongs) {
@@ -118,6 +125,6 @@ public class SearchFragment extends Fragment {
             }
         }
         adapter.setSongs(filteredSongs);
-        CurrentSongs.getInstance().setList(filteredSongs);
+        MusicPlayer.setSongList(filteredSongs);
     }
 }

@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import com.example.harmonix.PersistenceLayer.Database;
 import com.example.harmonix.LogicLayer.*;
 import com.example.harmonix.PersistenceLayer.IDatabase;
+import com.example.harmonix.PersistenceLayer.StubDatabase;
 
 public class AccountsTest {
 
@@ -32,9 +33,10 @@ public class AccountsTest {
     @Test
     public void testInformationUpdate() {
 
+        IDatabase database = new StubDatabase();
+
         // Create a new account first - so we can update it
         AccountHandler.createAccount("testUserUpdate", "testEmailUpdate", "testPassword", "testPassword");
-        IDatabase database = Database.getInstance();
         database.setCurrentUser("testUserUpdate");
 
         // Update the password only - also test if the email is staying the same as
