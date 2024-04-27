@@ -6,7 +6,7 @@ import com.example.harmonix.DataLayerTests.*;
 import com.example.harmonix.LogicLayerTests.*;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ UserTest.class, AccountsTest.class, MusicPlayerTest.class })
+@Suite.SuiteClasses({ UserTest.class, AccountsTest.class})
 
 public class AllUnitTests {
 

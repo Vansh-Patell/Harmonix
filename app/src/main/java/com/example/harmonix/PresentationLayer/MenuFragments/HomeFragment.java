@@ -92,6 +92,7 @@ public class HomeFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         }
         // Set current List of songs to be all songs
+        MusicPlayer.playingFromQueue = false;
         MusicPlayer.setSongList(SongsHandler.getAllSongs(getContext()));
         return view;
     }

@@ -10,4 +10,3 @@
 - We will create designs of what is expected in terms of UI for each feature so other members can maintain the same consistency throughout the app.
 - Contact other members immediately for any coding/bug related help, since one late submission affects the progression of the entire project.
 - Strictly follow due dates for user stories so we have plenty of time in the end to change anything if we had to.
-

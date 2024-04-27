@@ -13,10 +13,9 @@ import java.sql.Statement;
 public class RealDatabase implements IDatabase {
     public static Context context;
     private final String dbName = "UserDB";
-
     private String fullDBPath;
 
-    private String currentUsername = "";  //User that is currently loggedIn
+    private String currentUsername = ""; // User that is currently loggedIn
 
     public RealDatabase() {
         try {
@@ -28,12 +27,21 @@ public class RealDatabase implements IDatabase {
         } catch (IllegalAccessException | InstantiationException e) {
             throw new RuntimeException(e);
         }
-        fullDBPath = context.getApplicationContext().getFilesDir().getAbsolutePath() + "/" + dbName;
+
+        if (context != null) {
+            fullDBPath = context.getApplicationContext().getFilesDir().getAbsolutePath() + "/" + dbName;
+        } else {
+            fullDBPath = System.getProperty("user.dir") + "/" + dbName;
+        }
+
+        // fullDBPath = context.getApplicationContext().getFilesDir().getAbsolutePath()
+        // + "/" + dbName;
         initializeDB();
     }
 
     private Connection getConnection() {
-        String url = "jdbc:hsqldb:file:"+fullDBPath+";ifexists=false"; // This will create the database if it doesn't exist
+        String url = "jdbc:hsqldb:file:" + fullDBPath + ";ifexists=false";// This will create the database if it doesn't
+                                                                          // exist
         String user = "SA"; // default user
         String password = ""; // default password is empty
 
@@ -46,7 +54,7 @@ public class RealDatabase implements IDatabase {
 
     private void initializeDB() {
         try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement()) {
+                Statement stmt = conn.createStatement()) {
 
             // Create profile table
             stmt.executeUpdate("CREATE TABLE IF NOT EXISTS user_profiles (\n" +
@@ -56,11 +64,11 @@ public class RealDatabase implements IDatabase {
                     "    PRIMARY KEY (username)\n" +
                     ");");
 
-            //Insert some data
-            stmt.executeUpdate("INSERT INTO user_profiles VALUES('zhang', 'zhangl@gmail.com', '123');\n" +
-                    "INSERT INTO user_profiles VALUES('vansh', 'vansh@gmail.com', 'qwe');\n" +
-                    "INSERT INTO user_profiles VALUES('leon', 'leon@hotmail.com', '1234');");
-
+            // Insert some data
+            // stmt.executeUpdate("INSERT INTO user_profiles VALUES('zhang',
+            // 'zhangl@gmail.com', '123');\n" +
+            // "INSERT INTO user_profiles VALUES('vansh', 'vansh@gmail.com', 'qwe');\n" +
+            // "INSERT INTO user_profiles VALUES('leon', 'leon@hotmail.com', '1234');");
 
         } catch (SQLException e) {
             System.err.println("SQL Exception: " + e.getMessage());
@@ -150,7 +158,7 @@ public class RealDatabase implements IDatabase {
     }
 
     @Override
-    public void setCurrentUser(String username){
+    public void setCurrentUser(String username) {
         this.currentUsername = username;
     }
 }

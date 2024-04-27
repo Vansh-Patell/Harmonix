@@ -13,8 +13,8 @@
         android:iconTint="@android:color/black"
         android:id="@+id/library" />
     <item
-        android:title="@string/radio"
-        android:icon="@drawable/radio_icon"
+        android:title="Queue"
+        android:icon="@drawable/queue_icon"
         android:titleTextColor="@android:color/black"
         android:id="@+id/radio" />
     <item

@@ -1,0 +1,25 @@
+<!-- activity_main.xml -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/white"
+    tools:context=".PresentationLayer.Library.Playlists_Select">
+
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp"
+        android:drawSelectorOnTop="false"
+        android:divider="@android:color/darker_gray"
+        android:layout_alignParentTop="true"
+        android:dividerHeight="1dp" />
+
+
+
+
+</FrameLayout>

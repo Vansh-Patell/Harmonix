@@ -1,22 +1,45 @@
 # Harmonix - Endlessly groove to your favorite tracks
 
-## Vision Statement
+The purpose of this project is to create a music management app that allows users to listen to their favourite music, create playlists, and share songs with their friends. The app has a user-friendly interface that allows users to easily navigate through the app and find the music they love.
 
-The Harmonix is a go-to music management app, that will be used to make a user's music experience effortless and enjoyable. It's a place to explore new genres, craft personalized playlists, and have your entire music library at your fingertips. Unlike other music apps, this app is created to be user-friendly and straightforward, ensuring that even individuals with limited tech expertise can easily navigate through it.
+Take a peek at our website: https://harmonixweb.netlify.app/
 
-Harmonix is an innovative music management application that caters to any music enthusiasts that have different musical preferences and enjoy listening to music at any time and any place. Harmonix aims to help users engage with, and enjoy music to their own individual preference anyway they desire and be able to manage catalogs of created playlists efficiently, that supports organization based on albums,artists and more. Harmonix allows users to get recommendations based on their preferences and share their favorite songs and playlists with others, with an easy to navigate layout that will be accessible by anybody.
+## How to run the app
 
-By allowing users to create personal accounts and libraries, Harmonix offers a tailored music experience. This personalization enhances user satisfaction and engagement. The app's feature to discover new music based on user preferences is particularly valuable for users looking to expand their musical horizons and find new artists or genres that align with their tastes. By integrating social media, Harmonix will also enhance the social experience of music listening.
+Download the .zip file from this release, and open it into android studio.
 
-The ability to download music for offline listening is a significant benefit for users who might have limited internet access or wish to conserve data usage. Features for sorting and selecting music in the library, along with playlist creation and management reduce the time and effort required to find or organize music.
+Unit Tests & Integration Tests: The application's logic and data layer is tested using "AllUnitTests.java" and "AllIntegrationTests.java" files, before running the app please run the tests and make sure all of them pass.
 
-The project will be considered a success based off a few criteria; Based off surveys & interviews between usage of common music library apps and our app, we will determine which app users prefer, with ours being chosen the most being the goal. Another part of our success criteria is that the minimum number of steps to accomplish any common action between the most popular music management apps and our app should be minimal or at the most should take 5 steps to accomplish, with the reasoning behind the goal being to make our app as simple as possible for users.
+System Tests: The application's UI is tested using Espresso, to run the system tests, please go to the "androidTest" folder and run the "AllSystemTests" from there.
 
-## Features & User Stories
+Device: Please use Google Pixel Tablet API or connect a tablet using USB (in portrait mode) for testing/running
+Press run on Android Studio and the app will start!
 
-Explore the detailed features of Harmonix in our [Issues](https://code.cs.umanitoba.ca/comp3350-winter2024/spectacular6-a01-6/-/issues) section, to see how we're creating the app with the users in our mind.
+There is also a Harmonix.apk that is built from the revision of this code couldn't be attached to this release directly since the file size was above the allowed limit so we have attached it in the main branch, with the URL to it given below.
 
-## Architecture
+## Documentation
 
-The Architecture diagram for Iteration 1 showcasing the current state of Harmonix can be found [here](https://code.cs.umanitoba.ca/comp3350-winter2024/spectacular6-a01-6/-/blob/main/Architecture.png?ref_type=heads)
+- The vision statement can be found [here](https://code.cs.umanitoba.ca/comp3350-winter2024/spectacular6-a01-6/-/blob/main/VISION.md?ref_type=heads).
+- The architecture and design of the app can be found in the [Architecture](https://code.cs.umanitoba.ca/comp3350-winter2024/spectacular6-a01-6/-/tree/main/Architecture?ref_type=heads) folder
+- Each iteration's retrospective can be found in the [Docs](https://code.cs.umanitoba.ca/comp3350-winter2024/spectacular6-a01-6/-/tree/main/Docs?ref_type=heads) folder.
 
+## Current state of the app
+
+1.  The Harmonix app starts with a Homepage which has a "Start Listening" button.
+2.  The Welcome page (Feature 1) of the app allows the users to signup/login or skip and directly go into the app
+
+         Users can create an account which gets stored into a database. (Completed)
+         Login feature is complete, and allows users to log in to previously created account. (Completed)
+         Skip for now is for users that just want an overview of the app and the music it has! (Completed)
+
+3.  App's main page contains a menu that lets the users navigate through home, library, radio, search and account management options. Account Management (Feature 2) is implemented and allows for changing of account details. (Completed)
+
+4.  Home and Search fragments make up the 3rd & 4th feature for the app. The Home fragment contains all the current songs the User can choose from, and when a song is clicked from the list, a music player pops up and begins playing music. The volume of the song, and the current position of the song can be changed by sliders in the player, as well as allowing for pause/playing of the current song, and going to the next or previous song if they exist. The search fragment allows for searching of specified songs by name, and allows the user to click on the filtered list and play songs from there. (Completed).
+
+5.  Songs can be downloaded from the music player via a button in the top right which makes up (feature 5). Once a song is downloaded, it will appear in the users library downloads section. (Completed)
+
+6.  Currently, the creation of customizable playlists per user has been completed which adds the ability to save songs via playlist option as well. (Feature 6) (Completed)
+
+7.  Users now can also add songs to a queue where they don't need to go back and forth looking for their favourites! (Feature 7) (Completed)
+
+8.  Some features like the radio, music recommendations and social media sharing are still in progress and will be completed in the future releases.

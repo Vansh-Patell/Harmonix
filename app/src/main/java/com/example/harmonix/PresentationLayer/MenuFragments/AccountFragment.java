@@ -16,10 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
+
+import com.example.harmonix.DomainSpecificObjects.Songs;
+import com.example.harmonix.LogicLayer.MusicPlayer;
 import com.example.harmonix.PersistenceLayer.Database;
 import com.example.harmonix.PersistenceLayer.IDatabase;
 import com.example.harmonix.PresentationLayer.UserProfile.AccountOptionsPage;
 import com.example.harmonix.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,18 +33,17 @@ import com.example.harmonix.R;
  */
 public class AccountFragment extends Fragment {
 
-
     // Variables to store user input while updating account
     private EditText new_mobile;
     private EditText new_email;
     private EditText new_password;
     private EditText new_password_confirm;
 
-    //Get the instance of the stub database
+    // Get the instance of the stub database
     IDatabase database = Database.getInstance();
 
-    //"param1" and "param2" are parameters that are passed when
-    //creating an instance of the fragment using the newInstance method.
+    // "param1" and "param2" are parameters that are passed when
+    // creating an instance of the fragment using the newInstance method.
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String myParameterOne, myParameterTwo;
@@ -77,7 +81,7 @@ public class AccountFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.account_management, container, false);
 
@@ -94,10 +98,11 @@ public class AccountFragment extends Fragment {
         applyAccountChangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!database.getCurrentUser().equals("")){
+                if (!database.getCurrentUser().equals("")) {
                     updateAccountInformation();
                 } else {
-                    Toast.makeText(getActivity(), "You are not logged in! Please login first", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "You are not logged in! Please login first", Toast.LENGTH_SHORT)
+                            .show();
                 }
             }
         });
@@ -109,6 +114,7 @@ public class AccountFragment extends Fragment {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MusicPlayer.setQueue(new ArrayList<Songs>()); // On logout, reset the queue of songs
                 logout();
             }
         });
@@ -134,15 +140,16 @@ public class AccountFragment extends Fragment {
      * whether user has successfully updated
      * their information
      *************************************/
-    private void updateAccountInformation(){
+    private void updateAccountInformation() {
 
         String mobileString = new_mobile.getText().toString();
         String emailString = new_email.getText().toString();
         String passwordString = new_password.getText().toString();
         String confirmPasswordString = new_password_confirm.getText().toString();
 
-        //use the InfoUpdate account handler to verify user inputs & update the information
-        boolean success = updateAccount(mobileString,emailString,passwordString,confirmPasswordString);
+        // use the InfoUpdate account handler to verify user inputs & update the
+        // information
+        boolean success = updateAccount(mobileString, emailString, passwordString, confirmPasswordString);
 
         if (success) {
             Toast.makeText(getActivity(), "Account information Updated", Toast.LENGTH_SHORT).show();

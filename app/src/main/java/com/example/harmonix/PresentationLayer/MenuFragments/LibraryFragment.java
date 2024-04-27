@@ -10,8 +10,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.harmonix.PersistenceLayer.Database;
+import com.example.harmonix.PresentationLayer.Library.DownloadsFragment;
+import com.example.harmonix.PresentationLayer.Library.Playlists;
 import com.example.harmonix.R;
 
 /**
@@ -21,8 +29,8 @@ import com.example.harmonix.R;
  */
 public class LibraryFragment extends Fragment {
 
-    //"param1" and "param2" are parameters that are passed when
-    //creating an instance of the fragment using the newInstance method.
+    // "param1" and "param2" are parameters that are passed when
+    // creating an instance of the fragment using the newInstance method.
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -54,47 +62,50 @@ public class LibraryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             myParameterOne = getArguments().getString(ARG_PARAM1);
-            myParameterTwo= getArguments().getString(ARG_PARAM2);
+            myParameterTwo = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_library, container, false);
-
-        //Get each CardView
-        CardView playlistsCardView = view.findViewById(R.id.playlistsCardView);
-        CardView artistsCardView = view.findViewById(R.id.artistsCardView);
-        CardView songsCardView = view.findViewById(R.id.songsCardView);
-        CardView downloadsCardView =view.findViewById(R.id.downloadsCardView);
-
-        // Set OnClickListener for each CardView and navigate to that screen
-        playlistsCardView.setOnClickListener(new View.OnClickListener() {
+        View rootView = inflater.inflate(R.layout.fragment_library, container, false);
+        View download_button_view = rootView.findViewById(R.id.downloadsCardView);
+        download_button_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Switches to DownloadsFragment
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.library_fragment, new DownloadsFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
-        artistsCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
+        View playlist_button_view = rootView.findViewById(R.id.playlistsCardView);
+        playlist_button_view.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                Fragment previousFragment = fragmentManager.findFragmentById(R.id.library_fragment);
+                if (previousFragment != null) {
+                    fragmentManager.beginTransaction().remove(previousFragment).commit();
+
+                }
+                String currentUsername = Database.getInstance().getCurrentUser();
+                if (currentUsername.isEmpty()) {
+                    Toast.makeText(getContext(), "You need to be logged in to access playlists", Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.library_fragment, new Playlists());
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+
             }
         });
-
-        songsCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
-        downloadsCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
-        return view;
+        return rootView;
     }
 }

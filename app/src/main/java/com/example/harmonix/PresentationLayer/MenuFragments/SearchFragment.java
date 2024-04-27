@@ -29,19 +29,19 @@ import java.util.ArrayList;
  */
 public class SearchFragment extends Fragment {
 
-    //"param1" and "param2" are parameters that are passed when
-    //creating an instance of the fragment using the newInstance method.
+    // "param1" and "param2" are parameters that are passed when
+    // creating an instance of the fragment using the newInstance method.
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String myParameterOne, myParameterTwo;
 
-    //---------------------------------------------------------------
-    private EditText searchInput;   //search bar input from user
+    // ---------------------------------------------------------------
+    private EditText searchInput; // search bar input from user
     private RecyclerView searchRecyclerView;
     private MusicList adapter;
-    private ArrayList<Songs> allSongs;  //all songs in system
-    private ArrayList<Songs> filteredSongs;  //filtered songs
+    private ArrayList<Songs> allSongs; // all songs in system
+    private ArrayList<Songs> filteredSongs; // filtered songs
 
     public SearchFragment() {
         // Required empty public constructor
@@ -75,11 +75,11 @@ public class SearchFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        //Initialize the fields for searching
+        // Initialize the fields for searching
         searchInput = view.findViewById(R.id.searchInput);
         searchRecyclerView = view.findViewById(R.id.searchRecyclerView);
         searchRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -105,7 +105,7 @@ public class SearchFragment extends Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
-
+        MusicPlayer.playingFromQueue = false;
         return view;
     }
 
@@ -118,7 +118,8 @@ public class SearchFragment extends Fragment {
     private void filterSongs(String searchText) {
         filteredSongs = new ArrayList<>();
         for (Songs song : allSongs) {
-            // Filter logic based on your requirements, e.g., song title or artist contains the searchText
+            // Filter logic based on your requirements, e.g., song title or artist contains
+            // the searchText
             if (song.getSongTitle().toLowerCase().contains(searchText.toLowerCase())
                     || song.getSongTitle().toLowerCase().contains(searchText.toLowerCase())) {
                 filteredSongs.add(song);

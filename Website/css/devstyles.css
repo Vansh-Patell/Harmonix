@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+p {
+  color: rgb(85, 85, 85);
+}
+
+/* TRANSITION */
+a,
+.btn {
+  transition: all 300ms ease;
+}
+
+/**********************
+*  Desktop Navigation
+**********************/
+nav,
+.nav-links {
+  display: flex;
+}
+
+nav {
+  justify-content: space-around;
+  align-items: center;
+  height: 17vh;
+}
+
+.nav-links {
+  gap: 2.5rem;
+  list-style: none;
+  font-size: 1.5rem;
+}
+
+/* Navigation Links (Home, Development Experience and Gitlab) */
+a {
+  color: black;
+  text-decoration: none;
+  text-decoration-color: white;
+}
+
+a:hover {
+  color: grey;
+  text-decoration: unset;
+  text-decoration-color: rgb(181, 181, 181);
+}
+
+/* Harmonix Logo */
+.logo {
+  font-size: 2.5rem;
+}
+
+.logo:hover {
+  cursor: default;
+}
+
+/**********************
+*  FAQs
+**********************/
+.faq {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.faq-item {
+  width: 80%;
+  margin-top: 100px;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 20px;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  background: #f0f0f0;
+  border: none;
+  outline: none;
+}
+
+.faq-answer {
+  color: #fff;
+  padding: 10px;
+}
+
+.faq-item2 {
+  width: 80%;
+  margin-top: 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.faq-item3 {
+  width: 80%;
+  margin-top: 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.faq-item4 {
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  border: 1px solid #000;
+  border-radius: 5px;
+}

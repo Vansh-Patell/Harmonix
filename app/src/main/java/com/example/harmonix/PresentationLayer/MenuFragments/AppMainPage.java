@@ -24,8 +24,10 @@ public class AppMainPage extends AppCompatActivity {
         replaceFragment(new HomeFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            // Using switch causes error: "Constant Expression Required" for R.id.home. If else used instead.
-            // This block switches the current fragment displayed based off of the button pressed on the bottom navigation menu
+            // Using switch causes error: "Constant Expression Required" for R.id.home. If
+            // else used instead.
+            // This block switches the current fragment displayed based off of the button
+            // pressed on the bottom navigation menu
             if (item.getItemId() == R.id.home) {
                 replaceFragment(new HomeFragment());
             } else if (item.getItemId() == R.id.account) {
@@ -33,7 +35,7 @@ public class AppMainPage extends AppCompatActivity {
             } else if (item.getItemId() == R.id.library) {
                 replaceFragment(new LibraryFragment());
             } else if (item.getItemId() == R.id.radio) {
-                replaceFragment(new RadioFragment());
+                replaceFragment(new QueueFragment());
             } else if (item.getItemId() == R.id.search) {
                 replaceFragment(new SearchFragment());
             }

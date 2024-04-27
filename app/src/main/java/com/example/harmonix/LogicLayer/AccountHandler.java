@@ -26,11 +26,12 @@ public class AccountHandler {
      * and adds it to the database
      *************************************/
     public static boolean createAccount(String usernameString, String emailString, String passwordString,
-                                        String confirmPasswordString) {
+            String confirmPasswordString) {
         boolean created = false;
 
         // Validate the user inputs
-        if (passwordString.equals(confirmPasswordString) && !usernameString.isEmpty() && !emailString.isEmpty()) {
+        if (passwordString.equals(confirmPasswordString) && !usernameString.isEmpty() && !emailString.isEmpty()
+                && isValidEmail(emailString)) {
             // If they match, create a new user account and add it to the database
             User newUser = new User(usernameString, emailString, passwordString);
             // Initialize the database - Stub for Iteration 1
